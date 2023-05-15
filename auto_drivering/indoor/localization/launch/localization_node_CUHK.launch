@@ -1,0 +1,14 @@
+<launch>
+    <arg name="config_file" default = "/home/luo/work/map/work_ws/src/localization/config/localization.yaml" />
+    <arg name="rviz" default="true" />
+    <node pkg="localization" type="localization_node" name="localization_node" output="screen">
+        <param name="config_file" type="string" value="$(arg config_file)" />
+    </node>
+
+    <node pkg="localization" type="IMUpreintegration_node" name="IMUpreintegration_node" output="screen"/>
+
+    <group if="$(arg rviz)">
+        <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find localization)/rviz/localization.rviz" />
+    </group>
+	
+</launch>

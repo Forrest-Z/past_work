@@ -1,0 +1,16 @@
+%YAML:1.0
+# map_path: "/home/hw/catkin_ws/src/LUVI-Mapping/map_0629/result_data"   # 地图存放路径
+map_path: "/home/luo/work/map/work_ws/src/localization/result"   # 地图存放路径
+## 匹配相关参数
+# NDT　参数
+res : 1.0
+step_size : 0.1
+trans_eps : 0.01
+max_iter : 35
+## 滤波相关参数
+# voxel_filter:
+local_map_size : 10 # 100*2 kfs
+global_map_filter: 0.2
+local_map_filter: 0.05
+frame_filter: 1.5
+

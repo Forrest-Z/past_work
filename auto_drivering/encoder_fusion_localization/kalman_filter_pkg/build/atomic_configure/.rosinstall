@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/luo/work/filter_ws/src/kalman_filter_pkg/build/devel/setup.sh

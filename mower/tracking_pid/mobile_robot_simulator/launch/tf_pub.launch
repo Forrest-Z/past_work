@@ -1,0 +1,7 @@
+<!-- Launch file for starting the mobile robot simulator with a single laser scanner-->
+<launch>
+
+<node pkg="tf" type="static_transform_publisher" name="camera_base_link"
+  args="0 -1.57 0 0.3 0.035 0 camera base_link 100" />
+
+</launch>

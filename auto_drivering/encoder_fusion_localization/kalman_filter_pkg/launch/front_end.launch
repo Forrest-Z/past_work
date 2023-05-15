@@ -1,0 +1,6 @@
+<launch>
+<node pkg="rviz"  type="rviz"  name="rviz"  args="-d $(find kalman_filter_pkg)/rviz/front_end.rviz"></node>
+<node pkg="kalman_filter_pkg"  type="transfer_axis"  name="transfer_axis"  output="screen"></node>
+<node pkg="kalman_filter_pkg"  type="data_pretreat_node"  name="data_pretreat_node"  output="screen"></node>
+<node pkg="kalman_filter_pkg"  type="front_end_node"  name="front_end_node"  output="screen"></node>
+</launch>

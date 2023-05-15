@@ -1,0 +1,8 @@
+<launch>
+  <group ns="uwb_2">
+   <remap from="/imu/data_xsens" to="/imu/data_xsens_2"/> 
+   <remap from="/velodyne_points" to="/velodyne_points_2"/> 
+<remap from="/zedm/zed_node/aruco_detection" to="/zedm/zed_node/aruco_detection_2"/> 
+  <node pkg="rosbag" type="play" name="playe" output="screen" args="/media/ss/2t2/20210623/bag2/2021-06-23-17-35-14_0.bag"/>
+ </group>
+</launch>

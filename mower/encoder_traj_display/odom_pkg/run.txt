@@ -1,0 +1,14 @@
+1.cd ~/workspaces/ws_catkin/devel/lib/odom_pkg
+	./odom_pkg_node
+
+2.
+	roslaunch localization localization_node_CUHK.launch
+
+3.
+	roslaunch robot_pose_ekf  odom_imu.launch
+
+4.
+	rosrun tf static_transform_publisher 0 0 1.5 0 0 0 /base_link /imu_link 100
+
+5.
+	rosbag play wheel_odom.bag

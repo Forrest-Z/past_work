@@ -1,0 +1,8 @@
+<library path="lib/libEstimatorNodelet">
+<class name="gp_lio/EstimatorNodelet" type="gp_lio::EstimatorNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+        This is my main nodelet of LIO.
+    </description>
+</class>
+</library>
+

@@ -1,0 +1,10 @@
+<launch>
+
+  <node pkg="laser-odom_calibration" name="calib" type="io_test" output="screen">
+    <param name="file_path" type="string" value="/home/luo/carto_ws/catkin_0301/" />
+    <param name="bagname" type="string" value="odom_calibration" />
+    <param name="laser_topic" type="string" value="/lidar1/scan" />
+    <param name="odom_topic" type="string" value="/ff_motor_velocity" />
+  </node>
+
+</launch>

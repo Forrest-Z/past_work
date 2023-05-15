@@ -1,0 +1,1 @@
+cmd_/home/luo/work/filter_ws/src/linuxcan/common/kvcommon.ko := ld -r -m elf_x86_64 -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/luo/work/filter_ws/src/linuxcan/common/kvcommon.ko /home/luo/work/filter_ws/src/linuxcan/common/kvcommon.o /home/luo/work/filter_ws/src/linuxcan/common/kvcommon.mod.o ;  true

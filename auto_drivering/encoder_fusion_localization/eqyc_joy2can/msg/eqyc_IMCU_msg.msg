@@ -1,0 +1,17 @@
+std_msgs/Header header
+int16 IMCU504_Reqsteeringangle
+float32 IMCU504_Fbsteeringangle
+int8 IMCU504_Reqvehiclespeed
+int8 IMCU504_Fbvehiclespeed
+float32 IMCU504_Fbsteerwheeltorque
+uint8 IMCU504_Lightingstatus
+uint8 IMCU504_Gearstatus
+uint8 IMCU504_Controlmodestatus
+uint8 IMCU504_OperatingstatusB
+uint8 IMCU504_OperatingstatusA
+float32 IMCU505_FrequencyR2
+float32 IMCU505_FrequencyR1
+float32 IMCU505_FrequencyL2
+float32 IMCU505_FrequencyL1
+uint8 IMCU505_BrakePedal
+uint8 IMCU505_AcceleratorPedal

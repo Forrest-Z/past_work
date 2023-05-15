@@ -1,0 +1,8 @@
+<launch>
+<node pkg="rviz"  type="rviz"  name="rviz"  args="-d $(find kalman_filter_pkg)/rviz/gtsam_optimizer.rviz"></node>
+<node pkg="odom_pkg"  type="odom_pkg_node"  name="odom_pkg_node"  output="screen"></node>
+<node pkg="kalman_filter_pkg"  type="data_pretreat_node"  name="data_pretreat_node"  output="screen"></node>
+<node pkg="kalman_filter_pkg"  type="matching_node"  name="matching_node"  output="screen"></node>
+<node pkg="kalman_filter_pkg"  type="kalman_filter_node"  name="kalman_filter_node"  output="screen"></node>
+<node pkg="kalman_filter_pkg"  type="gtsam_odom_optimizer_node"  name="gtsam_odom_optimizer_node"  output="screen"></node>
+</launch>

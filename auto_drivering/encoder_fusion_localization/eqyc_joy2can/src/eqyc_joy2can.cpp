@@ -1,0 +1,186 @@
+#include "EQYC_UCCAN.h"
+#include <can_msgs/Frame.h>
+#include <canlib.h>
+#include <cmath>
+#include <eqyc_joy2can/eqyc_IMCU_msg.h>
+#include <errno.h>
+#include <ros/ros.h>
+#include <sensor_msgs/Joy.h>
+#include <signal.h>
+#include <stdio.h>
+#include <unistd.h>
+
+//程序主要实现的功能是利用joy_node节点读取罗技手柄的各个按键值；
+//将检测到的键值进行转化，转化成UCCAN指令；
+//再利用Kversa将转化好的CAN指令进行下发；
+//主要是对以下两个package进行依赖：kvaser_interface joy
+
+using namespace std;
+
+uint8_t ControlMode;
+uint8_t AA;
+uint8_t BB;
+uint8_t Emflag;
+uint8_t Light;
+float Empressure;
+float ReqSteer;
+float ReqSpeed;
+
+//注意这里的变量定义的位置！！
+
+ros::Publisher
+    can_pub; //这里预先定义好一个can_pub，以实现在回调函数中，对CAN线进行发送；这里是直接发送到can_rx的topic上；
+// kvaser_interface中的kvaser_can_bridge会自动将can_rx上收到的msg，利用kversa进行发送
+
+ros::Publisher IMCU_pub;
+
+eqyc_joy2can::eqyc_IMCU_msg IMCU_msg;
+
+void joy_Callback(const sensor_msgs::Joy::ConstPtr &msg) {
+
+  ReqSteer = msg->axes[2] * (-300);
+
+  if (msg->axes[1] > 0) {
+    Empressure = 0;
+    ReqSpeed = msg->axes[1] * 5;
+  } else {
+    Empressure = abs(msg->axes[1] * 100);
+    ReqSpeed = 0;
+  }
+
+  if (Light == 0 && msg->buttons[6] == 1) {
+    Light = 1;
+  } else if (Light == 1 && msg->buttons[6] == 1) {
+    Light = 2;
+  } else if (Light == 2 && msg->buttons[6] == 1) {
+    Light = 3;
+  } else if (Light == 3 && msg->buttons[6] == 1) {
+    Light = 0;
+  }
+
+  if (msg->buttons[0] == 1) {
+    ControlMode = 0;
+  } else if (msg->buttons[3] == 1) {
+    ControlMode = 1;
+  } else if (msg->buttons[1] == 1) {
+    ControlMode = 2;
+  } //这里只有当button:0,3,1等于1时，mode值才会发生改变，否则保持上一时刻的值；
+
+  if (Emflag == 0 && msg->buttons[2] == 1) {
+    Emflag = 1;
+  } else if (Emflag == 1 && msg->buttons[2] == 1) {
+    Emflag = 0;
+  }
+
+  if (AA == 0 && msg->buttons[4] == 1) {
+    AA = 1;
+  } else if (AA == 1 && msg->buttons[4] == 1) {
+    AA = 0;
+  } //这里主要实现的功能是，当检测到button4的值为1时，将AA的值进行改变；
+
+  if (BB == 0 && msg->buttons[5] == 1) {
+    BB = 1;
+  } else if (BB == 1 && msg->buttons[5] == 1) {
+    BB = 0;
+  }
+}
+
+void dbc_tx_Callback(const can_msgs::Frame::ConstPtr &msg) {
+  uint64_t data = 0;
+  for (int j = 0; j < msg->dlc; j++) {
+    data = data << 8;
+    data |= msg->data[j];
+  }
+  //这里是利用移位以及位运算，利用msg中的data（uint8[8]）转化为data（uint64_t）
+  if (msg->id == 0x504) {
+    unpack_message(msg->id, data, msg->dlc);
+    IMCU_msg.header.seq = msg->header.seq;
+    IMCU_msg.header.stamp = msg->header.stamp;
+    IMCU_msg.header.frame_id = msg->header.frame_id;
+    IMCU_msg.IMCU504_Reqsteeringangle =
+        can_0x504_IMCU_504_data.IMCU504_Reqsteeringangle;
+    IMCU_msg.IMCU504_Fbsteeringangle =
+        can_0x504_IMCU_504_data.IMCU504_Fbsteeringangle;
+    IMCU_msg.IMCU504_Reqvehiclespeed =
+        can_0x504_IMCU_504_data.IMCU504_Reqvehiclespeed;
+    IMCU_msg.IMCU504_Fbvehiclespeed =
+        can_0x504_IMCU_504_data.IMCU504_Fbvehiclespeed;
+    IMCU_msg.IMCU504_Fbsteerwheeltorque =
+        can_0x504_IMCU_504_data.IMCU504_Fbsteerwheeltorque;
+    IMCU_msg.IMCU504_Lightingstatus =
+        can_0x504_IMCU_504_data.IMCU504_Lightingstatus;
+    IMCU_msg.IMCU504_Gearstatus = can_0x504_IMCU_504_data.IMCU504_Gearstatus;
+    IMCU_msg.IMCU504_Controlmodestatus =
+        can_0x504_IMCU_504_data.IMCU504_Controlmodestatus;
+    IMCU_msg.IMCU504_OperatingstatusB =
+        can_0x504_IMCU_504_data.IMCU504_OperatingstatusB;
+    IMCU_msg.IMCU504_OperatingstatusA =
+        can_0x504_IMCU_504_data.IMCU504_OperatingstatusA;
+    IMCU_pub.publish(IMCU_msg);
+  }
+
+  if (msg->id == 0x505) {
+    unpack_message(msg->id, data, msg->dlc);
+    IMCU_msg.header.seq = msg->header.seq;
+    IMCU_msg.header.stamp = msg->header.stamp;
+    IMCU_msg.header.frame_id = msg->header.frame_id;
+    IMCU_msg.IMCU505_FrequencyR2 = can_0x505_IMCU_505_data.IMCU505_FrequencyR2;
+    IMCU_msg.IMCU505_FrequencyR1 = can_0x505_IMCU_505_data.IMCU505_FrequencyR1;
+    IMCU_msg.IMCU505_FrequencyL2 = can_0x505_IMCU_505_data.IMCU505_FrequencyL2;
+    IMCU_msg.IMCU505_FrequencyL1 = can_0x505_IMCU_505_data.IMCU505_FrequencyL1;
+    IMCU_msg.IMCU505_BrakePedal = can_0x505_IMCU_505_data.IMCU505_BrakePedal;
+    IMCU_msg.IMCU505_AcceleratorPedal =
+        can_0x505_IMCU_505_data.IMCU505_AcceleratorPedal;
+    IMCU_pub.publish(IMCU_msg);
+  }
+}
+
+//主函数
+int main(int argc, char **argv) {
+  // ROS节点初始化
+  ros::init(argc, argv, "eqyc_joy2can");
+
+  // 创建节点句柄
+  ros::NodeHandle n;
+
+  can_pub = n.advertise<can_msgs::Frame>("/can_rx", 10);
+
+  ros::Subscriber joy_sub = n.subscribe("/joy", 10, joy_Callback);
+
+  IMCU_pub = n.advertise<eqyc_joy2can::eqyc_IMCU_msg>("IMCU_INFO", 10);
+
+  ros::Subscriber dbc_tx_sub = n.subscribe("/can_tx", 10, dbc_tx_Callback);
+
+  // 循环等待回调函数
+  ros::Rate loop_rate(10);
+  while (ros::ok()) {
+    can_msgs::Frame Frame_1;
+    uint64_t data = 0;
+
+    Frame_1.id = 0x501;
+    Frame_1.is_rtr = false;
+    Frame_1.is_extended = false;
+    Frame_1.is_error = false;
+    Frame_1.dlc = 8;
+
+    can_0x501_UCCAN_501_t can_501_1;
+    can_501_1.UC501_EMflag = Emflag;
+    can_501_1.UC501_OperatingmodeA = AA;
+    can_501_1.UC501_OperatingmodeB = BB;
+    can_501_1.UC501_Controlmode = ControlMode;
+    can_501_1.UC501_Empressure = Empressure;
+    can_501_1.UC501_Reqsteeringangle = ReqSteer;
+    can_501_1.UC501_Reqvehiclespeed = ReqSpeed;
+    can_501_1.UC501_Lightingcontrol = Light;
+
+    pack_can_0x501_UCCAN_501(&can_501_1, &data);
+    for (int j = Frame_1.dlc - 1; j >= 0; j--) {
+      Frame_1.data[j] |= data;
+      data = data >> 8;
+    }
+    can_pub.publish(Frame_1);
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
+  return 0;
+}

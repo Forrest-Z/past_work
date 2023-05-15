@@ -1,0 +1,1 @@
+cmd_/home/luo/work/filter_ws/src/linuxcan/pcican2/kvpcicanII.o := ld -m elf_x86_64 -z max-page-size=0x200000   -r -o /home/luo/work/filter_ws/src/linuxcan/pcican2/kvpcicanII.o /home/luo/work/filter_ws/src/linuxcan/pcican2/PciCan2HwIf.o /home/luo/work/filter_ws/src/linuxcan/pcican2/memQ.o 

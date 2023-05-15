@@ -1,0 +1,15 @@
+%YAML:1.0
+map_path: "/home/luo/work/catkin_ws/src/gp_lio/result"   # 地图存放路径
+## 匹配相关参数
+# NDT
+res : 1.0
+step_size : 0.1
+trans_eps : 0.01
+max_iter : 30
+## 滤波相关参数
+# voxel_filter:
+local_map_size : 5 # 100*2 kfs
+global_map_filter: 1.5
+local_map_filter: 0.5
+frame_filter: 1.5
+

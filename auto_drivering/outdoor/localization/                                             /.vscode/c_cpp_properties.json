@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/ss/catkin_test/devel/include",
+                "/home/ss/catkin_ws/devel/include",
+                "/opt/ros/melodic/include",
+                "/home/ss/catkin_ws/src/laser_slam/align_timestamp_imugps/include",
+                "/home/ss/catkin_ws/src/open_slam/VINS-Mono/camera_model/include",
+                "/home/ss/catkin_ws/src/Write_VIO/code_utils/include",
+                "/home/ss/catkin_ws/src/driver/cv_camera/include",
+                "/home/ss/catkin_ws/src/laser_slam/gps_imu_ekf/include",
+                "/home/ss/catkin_ws/src/Write_VIO/imu_tk/include",
+                "/home/ss/catkin_ws/src/driver/camera_umd/jpeg_streamer/include",
+                "/home/ss/catkin_ws/src/livox_horizon_loam/include",
+                "/home/ss/catkin_ws/src/open_slam/msckf_vio/include",
+                "/home/ss/catkin_ws/src/laser_slam/robot_localization/include",
+                "/home/ss/catkin_ws/src/open_slam/R-VIO/include",
+                "/home/ss/catkin_ws/src/driver/usb_cam/include",
+                "/home/ss/catkin_ws/src/driver/camera_umd/uvc_camera/include",
+                "/home/ss/catkin_ws/src/driver/zed-ros-wrapper/zed_interfaces/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++14"
+        }
+    ],
+    "version": 4
+}

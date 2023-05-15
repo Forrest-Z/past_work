@@ -1,0 +1,12 @@
+<launch>
+    <arg name="config_file" default = "/home/xc/catkin_slam/src/gp_lio/config/localization.yaml" />
+    <arg name="rviz" default="true" />
+    <node pkg="gp_lio" type="localization_node" name="localization_node" output="screen">
+        <param name="config_file" type="string" value="$(arg config_file)" />
+    </node>
+
+    <group if="$(arg rviz)">
+        <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find gp_lio)/rviz/gp_lio_localization.rviz" />
+    </group>
+	
+</launch>

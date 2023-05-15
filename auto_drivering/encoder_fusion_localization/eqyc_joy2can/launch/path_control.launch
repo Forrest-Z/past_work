@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<launch>
+
+<!--     <param name="k_v" type="double" value="2.0"/> -->
+<!--     <param name="alpha" type="double" value="0.1"/> -->
+<!--     <param name="wheelbase" type="double" value="1.6"/> -->
+
+  <rosparam file="$(find eqyc_joy2can)/cfg/Stanley_Parameters.yaml" command="load" />
+
+  <node pkg="eqyc_joy2can" type="GlobalPathPublisher" name="GlobalPathPublisher" output="screen">
+
+  </node>
+  <node pkg="eqyc_joy2can" type="path_tracking" name="path_tracking" output="screen">
+  </node>
+
+</launch>

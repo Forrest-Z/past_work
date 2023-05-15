@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/wchen/Projects/Code/catkin_ws/devel/include",
+        "/opt/ros/kinetic/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/VINS-Mono-master/camera_model/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/dataset_visualization/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/gp_lio/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/image_test/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/laser_slam/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/lego_loam/LeGO-LOAM-master/LeGO-LOAM/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/lio-mapping-master/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/loam_velodyne-master/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/robust_point_cloud_registration-master/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/R-VIO/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/velodyne/velodyne_driver/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/velodyne/velodyne_laserscan/include",
+        "/home/wchen/Projects/Code/catkin_ws/src/velodyne/velodyne_pointcloud/include",
+        "/usr/include"
+      ],
+      "name": "Linux"
+    }
+  ]
+}

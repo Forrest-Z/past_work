@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: eqyc_joy2can
+Description: Description of eqyc_joy2can
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: message_runtime

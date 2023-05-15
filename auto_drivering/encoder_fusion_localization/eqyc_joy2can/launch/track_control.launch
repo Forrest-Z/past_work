@@ -1,0 +1,5 @@
+<launch>  
+   <include file="$(find kvaser_interface)/launch/kvaser_can_bridge.launch"/>   
+   <node name="joy" pkg="joy" type="joy_node"/> 
+   <node name="track_control" pkg="eqyc_joy2can" type="track_control"/>
+</launch>

@@ -1,0 +1,7 @@
+stanley:
+  k_v: 2.0
+  alpha: 0.1
+
+tractor:
+  wheelbase: 1.6
+

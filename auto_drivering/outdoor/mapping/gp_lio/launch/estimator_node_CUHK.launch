@@ -1,0 +1,12 @@
+<launch>
+    <arg name="config_file" default = "/home/luo/work/catkin_ws/src/gp_lio/config/CUHK_config_no_extrinsic.yaml" />
+    <arg name="rviz" default="true" />
+    <node pkg="gp_lio" type="estimator_node" name="estimator_node" output="screen">
+        <param name="config_file" type="string" value="$(arg config_file)" />
+    </node>
+
+    <group if="$(arg rviz)">
+        <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find gp_lio)/rviz/gp_lio_visualization.rviz" />
+    </group>
+	
+</launch>

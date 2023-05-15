@@ -1,0 +1,1 @@
+cmd_/home/luo/workspaces/ws_catkin/src/linuxcan/pcican2/kvpcicanII.mod := { echo  /home/luo/workspaces/ws_catkin/src/linuxcan/pcican2/PciCan2HwIf.o /home/luo/workspaces/ws_catkin/src/linuxcan/pcican2/memQ.o;  echo; } > /home/luo/workspaces/ws_catkin/src/linuxcan/pcican2/kvpcicanII.mod

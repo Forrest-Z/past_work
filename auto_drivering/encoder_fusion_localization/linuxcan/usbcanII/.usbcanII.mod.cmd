@@ -1,0 +1,1 @@
+cmd_/home/luo/workspaces/ws_catkin/src/linuxcan/usbcanII/usbcanII.mod := { echo  /home/luo/workspaces/ws_catkin/src/linuxcan/usbcanII/usbcanHWIf.o;  echo; } > /home/luo/workspaces/ws_catkin/src/linuxcan/usbcanII/usbcanII.mod

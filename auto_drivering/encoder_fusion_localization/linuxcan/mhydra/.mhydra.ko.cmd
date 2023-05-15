@@ -1,0 +1,1 @@
+cmd_/home/luo/work/filter_ws/src/linuxcan/mhydra/mhydra.ko := ld -r -m elf_x86_64 -z max-page-size=0x200000 -T ./scripts/module-common.lds --build-id  -o /home/luo/work/filter_ws/src/linuxcan/mhydra/mhydra.ko /home/luo/work/filter_ws/src/linuxcan/mhydra/mhydra.o /home/luo/work/filter_ws/src/linuxcan/mhydra/mhydra.mod.o ;  true

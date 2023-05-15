@@ -1,0 +1,7 @@
+<launch>
+    <arg name="config_file" default = "/home/wchen/Projects/Code/catkin_ws/src/gp_lio/config/config_no_extrinsic.yaml" />
+    <node pkg="nodelet" type="nodelet" name="standalone_nodelet" args="manager" output="screen"/>
+    <node pkg="nodelet" type="nodelet" name="EstimatorNodelet" args="load gp_lio/EstimatorNodelet standalone_nodelet" output="screen">
+        <param name="config_file" type="string" value="$(arg config_file)" />
+    </node>
+</launch>

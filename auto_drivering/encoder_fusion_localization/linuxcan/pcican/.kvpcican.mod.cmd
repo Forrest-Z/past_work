@@ -1,0 +1,1 @@
+cmd_/home/luo/workspaces/ws_catkin/src/linuxcan/pcican/kvpcican.mod := { echo  /home/luo/workspaces/ws_catkin/src/linuxcan/pcican/PciCanHwIf.o /home/luo/workspaces/ws_catkin/src/linuxcan/pcican/dallas.o;  echo; } > /home/luo/workspaces/ws_catkin/src/linuxcan/pcican/kvpcican.mod
